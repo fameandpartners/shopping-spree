@@ -3,8 +3,8 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import win from '../../polyfills/windowPolyfill';
-import noop from '../../libs/noop';
+import win from './windowPolyfill';
+import noop from './noop';
 
 export default class ShareModal extends React.Component {
   constructor(props) {

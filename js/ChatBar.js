@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import FirebaseComponent from './FirebaseComponent';
 
 // Polyfills
-import win from '../../polyfills/windowPolyfill';
+import win from './windowPolyfill';
 
 export default class ChatBar extends FirebaseComponent {
   constructor(props) {

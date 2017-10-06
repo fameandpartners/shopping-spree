@@ -10,9 +10,9 @@ import ShareModal from './ShareModal';
 import Onboarding from './Onboarding';
 
 // Polyfills
-import win from '../../polyfills/windowPolyfill';
+import win from './windowPolyfill';
 
-import '../../../css/components/shopping_spree.scss';
+import '../css/shopping_spree.scss';
 
 class ShoppingSpree extends Component {
   constructor(props) {

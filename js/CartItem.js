@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noop from '../../libs/noop';
+import noop from './noop';
 
 export default class CartItem extends React.Component {
   constructor(props) {
