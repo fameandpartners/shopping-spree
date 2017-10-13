@@ -19,13 +19,13 @@ export default class AddToCartModal extends FirebaseComponent
                 showHeightError: false,
                 showSizeError: null
             };
-        
+
         this.sizeSelected = this.sizeSelected.bind( this );
         this.addToCart = this.addToCart.bind(this);
         this.heightSelected = this.heightSelected.bind(this);
         this.initializeFirebase = this.initializeFirebase.bind(this);
         this.sumCartData = this.sumCartData.bind(this);
-        
+
         this.initializeFirebase();
 
     }
@@ -55,7 +55,7 @@ export default class AddToCartModal extends FirebaseComponent
         {
             this.createFirebaseCartItem();
             this.createFirebaseFamebotMessage();
-            
+
             this.props.closeModal();
         }
     }
@@ -71,15 +71,15 @@ export default class AddToCartModal extends FirebaseComponent
             cartTotal += parseInt( dress['dress']['price'] );
         }
 
-        this.createFamebotMessage( this.props.name + " just added " + this.props.dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount( cartTotal ) +  "% off" );
-                                   
+        this.createFamebotMessage( this.props.name + " just added " + this.props.dress['name'] + " to their cart.  You are now getting " + this.calculateDiscount( cartTotal ) +  "% off", "discount" );
+
     }
-    
+
     createFirebaseFamebotMessage()
     {
         this.databaseRef( "cart" ).once('value').then( this.sumCartData );
     }
-    
+
     createFirebaseCartItem()
     {
         let newMessage = this.cartDB.push();
@@ -111,11 +111,11 @@ export default class AddToCartModal extends FirebaseComponent
         super.connectToFirebase();
         this.cartDB  = this.databaseRef( "cart" );
     }
-    
+
     heightSelected( event )
     {
         this.setState({height: event.target.value});
-        
+
     }
     sizeSelected( size )
     {
@@ -128,14 +128,14 @@ export default class AddToCartModal extends FirebaseComponent
         for( let i = startSize; i <= endSize; i+= 2 )
         {
             sizeRows.push( <SizeButton key={i.toString()} size={i.toString()} selectedSize={this.state.selectedSize} selectionCallback={this.sizeSelected}/> );
-            
+
         }
 
         for( let i = sizeRows.length; i < 5; i += 1 )
         {
             sizeRows.push( <div key={endSize + i } className="size-box-hidden"></div> );
         }
-        
+
         return( <div className="row">
                 <div className="col-xs-8 col-xs-push-1">
                 <div className="size-row">{sizeRows}</div>
@@ -143,7 +143,7 @@ export default class AddToCartModal extends FirebaseComponent
                 </div>
               );
     }
-    
+
     render()
     {
         return(
@@ -151,32 +151,32 @@ export default class AddToCartModal extends FirebaseComponent
               <div className='shopping-spree-share-modal-background shopping-spree'>
               </div>
               <div className="shopping-spree-cart-modal shopping-spree">
-                <a className="btn-close med" alt="Close" onClick={this.props.closeModal}></a>                
+                <a className="btn-close med" alt="Close" onClick={this.props.closeModal}></a>
                 <div className="row">
                   <div id="add-to-cart-headline" className="col-xs-12 text-center shopping-spree-big-headline">
                     Add to your cart!
                   </div>
                 </div>
-                
+
                 <div className="row modal-sub-headline">
                   <div className="col-xs-12 text-center">
                     Just tell us your height and size, and
                   </div>
                 </div>
-                
+
                 <div className="row">
                   <div className="col-xs-12 text-center">
                     we'll take care of your tailoring.
                   </div>
                 </div>
-                
+
                 <div className="row height-select-text">
                   <div className="col-xs-11 col-xs-push-1">
                     What's your Height?
                   </div>
                 </div>
-                
-                <div className="row"> 
+
+                <div className="row">
                   <div className="col-xs-8 col-md-6 col-xs-push-1">
                     <select onChange={this.heightSelected} className={this.state.showHeightError ? "height-select red-border": "height-select"}>
                       <option disabled selected value>Select</option>
@@ -222,7 +222,7 @@ export default class AddToCartModal extends FirebaseComponent
                                       <div className="col-xs-11 col-xs-push-1 shopping-spree-error">Please select your size</div>
                                     </div>
                                 }
-                                
+
                                 <div className="row">
                                   <div className="col-xs-11 col-xs-push-1">
                                     <a className="shopping-spree-link" href="https://www.fameandpartners.com/size-guide" target="_blank">View Sizing Guide</a>
