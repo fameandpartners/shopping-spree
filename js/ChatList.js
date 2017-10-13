@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import React from 'react';
 import * as firebase from 'firebase';
 
@@ -7,6 +6,7 @@ import TextMessage from './TextMessage';
 import JoinedMessage from './JoinedMessage';
 import DressMessage from './DressMessage';
 import FirebaseComponent from './FirebaseComponent';
+import win from './windowPolyfill';
 
 export default class ChatList extends FirebaseComponent
 {
@@ -154,12 +154,15 @@ export default class ChatList extends FirebaseComponent
                 <div className="col-xs-4 header-name">
                   {this.props.name}
                 </div>
-                <div onClick={this.props.updateExitModalStatus} className="col-xs-1 col-xs-push-3" role="button">
-                  Exit
+                <div className="col-xs-8 header-name text-right">
+                  <span className="chat-list-exit link" onClick={this.props.doneShoppingSpree} role="button">
+                    Exit
+                  </span>
+                  <span className="link" onClick={this.props.showShareModal} role="button">
+                    Invite other friends!
+                  </span>
                 </div>
-                <div onClick={this.props.showShareModal} className="col-xs-4 col-xs-push-3 text-right" role="button">
-                  Invite other friends!
-                </div>
+
               </div>
               <div className="row">
                 <div className="chat-content">

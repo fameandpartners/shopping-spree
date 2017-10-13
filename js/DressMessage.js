@@ -42,9 +42,36 @@ export default class DressMessage extends React.Component
         {
             return (<div/>);
         }
-        
+
     }
-    
+
+    generateBackgroundValueFromColor({ image, patternUrl, hexValue }) {
+      if (patternUrl) {
+        return `url(${patternUrl})`;
+      }
+
+      if (image) {
+        return `url(${image})`;
+      }
+
+      return hexValue;
+    }
+
+      generateColorSelectionNode({hexValue, image, patternUrl}) {
+      const background = this.generateBackgroundValueFromColor({
+        hexValue: hexValue,
+        image,
+        patternUrl,
+      });
+
+      return (
+          <span
+            style={{ background }}
+            className='dress-message-color-selection'
+          />
+      );
+    }
+
     render()
     {
         const sameOwner = this.props.sameOwnerAsLastMessage;
@@ -81,15 +108,15 @@ export default class DressMessage extends React.Component
                       </div>
                     </div>
                     <div className="row">
-                      <div className={"col-xs-4"}>
-                        Color
+                      <div className="col-xs-6">
+                        Color&nbsp;{this.props.dress.color.presentation}&nbsp;
+                        {this.generateColorSelectionNode(this.props.dress.color)}
                       </div>
-                      <div className={"col-xs-4 dress-color swatch color-" + this.props.dress.color.name}/>
                     </div>
                     { this.renderCustomizations() }
                     <div className="row add-to-spree-btn">
                       <div className="col-xs-12">
-                <a onClick={() => this.props.showAddToCartModal(this.props.dress)} className='center-block btn btn-black btn-lrg'>Add to my cart</a>
+                        <a onClick={() => this.props.showAddToCartModal(this.props.dress)} className='center-block btn btn-black btn-lrg'>Add to my cart</a>
                       </div>
                     </div>
                   </div>

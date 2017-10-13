@@ -15,8 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 export default class ShoppingSpree extends FirebaseComponent {
   constructor(props) {
-      super(props);
-      console.log( 'starting shopping spree' );
+    super(props);
     this.cookies = new Cookies();
     this.setInitialState();
 
@@ -100,6 +99,7 @@ export default class ShoppingSpree extends FirebaseComponent {
       firebaseNodeId: firebaseId,
       minimize,
       showAddToCartModal: false,
+      startingState: display,
       dressAddingToCart: null,
       showExitModal: false,
     };
@@ -169,6 +169,7 @@ export default class ShoppingSpree extends FirebaseComponent {
     this.setState(
       {
         display: 'chat',
+        minimize: false,
       },
     )
   }
@@ -212,6 +213,7 @@ export default class ShoppingSpree extends FirebaseComponent {
   }
 
   render() {
+    console.log('inita', this.state);
     return (
       <div>
           <div>
@@ -253,13 +255,17 @@ export default class ShoppingSpree extends FirebaseComponent {
                   closed={this.state.minimize}
                   showAddToCartModal={this.showAddToCartModal}
                   doneShoppingSpree={this.doneShoppingSpree}
-                  howShareModal={this.showShareModal}
+                  showShareModal={this.showShareModal}
                   updateExitModalStatus={this.updateExitModalStatus} />
 
             }
         {
                 this.state.display === 'share' &&
-                <ShareModal nextStep={this.doneSharing} firebaseNodeId={this.state.firebaseNodeId} />
+                <ShareModal
+                  hasEntered={this.state.startingState === 'chat'}
+                  firebaseNodeId={this.state.firebaseNodeId}
+                  nextStep={this.doneSharing}
+                />
         }
         {
           this.state.showExitModal &&
